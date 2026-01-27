@@ -1,0 +1,19 @@
+class MainLayout(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.orientation = "vertical"
+
+        # Camera widget
+        self.cam = Camera(play=False)  # play=False means camera won't start until you click button
+        self.cam.resolution = (640, 480)
+        self.add_widget(self.cam)
+
+        # Start/Stop button
+        self.btn = Button(text="Start Camera")
+        self.btn.bind(on_press=self.toggle_camera)
+        self.add_widget(self.btn)
+
+    def toggle_camera(self, instance):
+        # Toggle camera on/off
+        self.cam.play = not self.cam.play
+        self.btn.text = "Stop Camera" if self.cam.play else "Start Camera"
