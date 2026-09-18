@@ -1,183 +1,132 @@
-Project Report: Face Detection and Recognition System with Sound Alert
-1. Project Title
+Face Recognition and Emotion Detection
 
-Face Detection and Recognition System with Sound Alert
+📌 Project Overview
 
-2. Objective
+This project uses **Python, OpenCV, and DeepFace** to detect a person's face through a webcam and identify their facial emotion in real time.
 
-The main objective of this project is to develop a real-time face detection and recognition system using Python. The system detects faces from a live camera feed, recognizes known faces from a pre-stored database, and triggers an alert sound if an unknown face is detected.
+The system captures video from the webcam, detects the face, and analyzes the facial expression to display the detected emotion.
 
-Key goals:
+🎯 Objectives
 
-Load face data from a database.
+ Detect faces using a webcam.
+ Detect facial emotions in real time.
+ Display a box around the detected face.
+ Display the detected emotion on the screen.
+ Provide a simple and easy-to-use computer vision application.
 
-Detect and recognize faces in real-time.
+ 🛠️ Technologies Used
 
-Highlight recognized faces with a green rectangle and unknown faces with a red rectangle.
+Python 3.11
+OpenCV
+DeepFace
+TensorFlow
+NumPy
+😊 Emotions Detected
 
-Trigger a beep sound for unauthorized faces.
+The system can detect emotions such as:
+ Happy
+Sad
+Angry
+ Fear
+ Surprise
+ Disgust
+ Neutral
+ ⚙️ How It Works
 
-Provide a simple GUI interface for user interaction.
-
-3. Tools and Technologies Used
-Component	Purpose
-Python	Programming language for implementation
-OpenCV	Capturing video feed and drawing rectangles/text on frames
-face_recognition	Detecting and encoding faces, performing face recognition
-Tkinter	GUI interface for starting and stopping camera
-winsound	Generating alert sounds for unknown faces
-os	Handling database folder files
-time	Ensuring time delay between consecutive alerts
-4. System Requirements
-
-Hardware:
-
-Webcam or laptop camera
-
-CPU with sufficient processing power for real-time face recognition
-
-Software:
-
-Python 3.x
-
-Libraries: OpenCV, face_recognition, Tkinter, winsound, numpy
-
-5. Database Structure
-
-A folder named face_db stores images of known users.
-
-Each image represents one person.
-
-File names are used as identifiers for recognized faces.
-
-Supported image formats: .jpg and .png
-
-Example:
-
-face_db/
+text
+Webcam
+   ↓
+Capture Video
+   ↓
+Face Detection
+   ↓
+Extract Face
+   ↓
+DeepFace Emotion Analysis
+   ↓
+Display Emotion
+ 📂 Project Structure
+text
+Face-Emotion-Detection/
 │
-├── vishnu.jpg
-├── priya.png
-└── others.jpg
+├── 5.py
+└── README.md
 
-6. Methodology
-Step 1: Load Known Faces
+💻 Installation
 
-All images in the database folder are loaded.
+Make sure **Python 3.11** is installed.
 
-face_recognition encodes each face into a 128-dimensional vector.
+Open Command Prompt and install the required packages:
 
-Encodings and names are stored in lists (known_encodings and known_names).
+bash
+py -3.11 -m pip install opencv-python
+py -3.11 -m pip install deepface
+py -3.11 -m pip install tf-keras
 
-Step 2: Initialize Camera
+ ▶️ How to Run
 
-A webcam is initialized using OpenCV (cv2.VideoCapture).
+Open Command Prompt in the project folder and run:
 
-Frames are continuously captured for processing.
+bash
+py -3.11 5.py
 
-Step 3: Detect Faces
 
-Frames are converted to RGB for face recognition.
+The webcam will open automatically.
 
-Faces in the frame are detected using face_recognition.face_locations.
+The application will show:
 
-Encodings are generated for each detected face.
+* A rectangle around the detected face.
+* The detected emotion above the face.
 
-Step 4: Face Recognition
+### ⏹️ Stop the Camera
 
-Compare captured face encodings with database encodings using face_recognition.face_distance.
+Press:
 
-Calculate the closest match.
+```text
+Q
+```
 
-Set a threshold (0.72) to decide whether the face is recognized.
+to close the camera window.
 
-Step 5: Display Results
+## 📸 Example
 
-Draw rectangles around detected faces:
+When a face is detected, the application displays:
 
-Green: recognized face
+```text
++----------------+
+|                |
+|    FACE        |
+|   DETECTED     |
+|                |
++----------------+
 
-Red: unknown face
+Emotion: Happy
+```
 
-Display the name above the rectangle.
+## ✨ Features
 
-Play beep sound for unknown faces using winsound.
+* Real-time webcam detection
+* Face detection
+* Emotion recognition
+* No database required
+* No face image folder required
+* Simple Python implementation
 
-Step 6: GUI
+## 🚀 Future Improvements
 
-Tkinter GUI provides buttons to start and stop the camera.
+* Add person identification/face recognition.
+* Add a graphical user interface.
+* Detect multiple faces at the same time.
+* Store emotion results.
+* Display emotion statistics using graphs.
+* Improve detection speed and accuracy.
 
-Window shows the live camera feed with detected faces.
+## 👩‍💻 Author
 
-7. Workflow Diagram
-[ Start GUI ] 
-       |
-[ Click "Start Camera" ]
-       |
-[ Capture Video Frame ]
-       |
-[ Detect Faces using face_recognition ]
-       |
-[ Encode Faces ]
-       |
-[ Compare with Database Encodings ]
-       |
-[ Recognized? ] --> [ Yes ] --> Draw Green Rectangle
-       |
-       --> [ No ] --> Draw Red Rectangle + Play Alert Sound
-       |
-[ Display Frame in GUI ]
-       |
-[ Loop until Stop or 'q' pressed ]
+**Vishnu Priya**
 
-8. Code Snippet
-# Compare detected face with known faces
-distances = face_recognition.face_distance(known_encodings, face_encoding)
-min_distance = min(distances)
-THRESHOLD = 0.72
+B.Tech – Computer Science and Engineering (Data Science)
 
-if min_distance < THRESHOLD:
-    label = "Vishnu Priya"
-    color = (0, 255, 0)
-else:
-    label = "Unknown"
-    color = (0, 0, 255)
-    winsound.Beep(1000, 200)  # Alert
+## 📄 License
 
-9. Features
-
-Real-time face detection and recognition.
-
-Sound alert for unknown faces.
-
-User-friendly GUI with Start/Stop camera controls.
-
-Database-driven recognition system.
-
-Customizable threshold for face matching.
-
-10. Challenges
-
-Accurate face recognition requires good quality images.
-
-Processing multiple faces simultaneously can be computationally heavy.
-
-Lighting conditions and camera quality can affect recognition accuracy.
-
-Need to tune the threshold to balance false positives and false negatives.
-
-11. Future Enhancements
-
-Integrate multiple users and roles in the database.
-
-Add logging for recognized/unknown faces with timestamps.
-
-Store captured unknown face images for security audit.
-
-Optimize performance using GPU acceleration.
-
-Extend GUI to show recognized user details.
-
-12. Conclusion
-
-This project demonstrates the practical application of face detection and recognition using Python. It provides a foundation for security systems, attendance management, and home automation. By combining OpenCV, face_recognition, and Tkinter, we can develop an interactive system that is both effective and user-friendly.
+This project is created for educational and project purposes.
